@@ -3,9 +3,12 @@ const helmet = require('helmet');
 const app = express();
 app.use(helmet.hidePoweredBy());
 app.use(helmet.frameguard({action: 'deny'}));
+app.use(helmet.xssFilter())
 
-
-
+app.use(express.urlencoded({extended:true}));
+app.post('/test',(req,res) => {
+  res.send('Input received:' + req.body.input);
+});
 
 
 
